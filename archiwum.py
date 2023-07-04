@@ -111,3 +111,16 @@ class Percepton:
     def dodaj(self, x, y=lista):
         y = y.append(x)
 
+
+
+class Percepton:
+    lista = []
+
+    def __init__(self):
+        pass
+
+    def __str__(self, x=lista):
+        print("Wartosc obiektu" + str(x))
+
+    def dodaj(self, x, y=lista):
+        y = y.append(x)

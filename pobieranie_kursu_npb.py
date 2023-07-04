@@ -1,5 +1,3 @@
-# http://api.nbp.pl/api/exchangerates/rates/{table}/code}/{date}/
-# http://api.nbp.pl/api/exchangerates/rates/a/usd/{date}/
 import requests
 import datetime
 import json
@@ -16,9 +14,9 @@ def pobierz_kurs(waluta="usd", termin="today"):
         return 0
 
 
-def lista_dat(poczatek="2023-01-01", koniec="2023-06-06", format='%Y-%m-%d'):
-    a = datetime.datetime.strptime(poczatek, format)
-    b = datetime.datetime.strptime(koniec, format)
+def lista_dat(x="2023-01-01", y="2023-06-06", z='%Y-%m-%d'):
+    a = datetime.datetime.strptime(x, z)
+    b = datetime.datetime.strptime(y, z)
     if (b - a).days > 0:
         lista = []
         while a.date() != b.date():

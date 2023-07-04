@@ -43,18 +43,11 @@ def licz_wage(waga, blad, predkosc=predkosc_liczenia):
 
 
 class Percepton:
-    lista = []
-
+    wagi_poczatkowe=[]
     def __init__(self):
         pass
 
-    def __str__(self, x=lista):
-        print("Wartosc obiektu" + str(x))
-
-    def dodaj(self, x, y=lista):
-        y = y.append(x)
-
-
+cholera = Percepton
 for i in range(100):
     poprzedni_kurs = nowy_kurs
     nowy_kurs = pobierz_kurs()
@@ -63,3 +56,4 @@ for i in range(100):
     print(lista_kursow)
     print("Różnica binarna: ", str(roznica_binarna(nowy_kurs, poprzedni_kurs)))
     print("Średnia 5 dni  : ", str(srednia_xdni(lista_kursow)))
+    print(cholera.wagi_poczatkowe)
