@@ -7,6 +7,43 @@ predkosc_liczenia = 0.001
 nowy_kurs = 1
 
 
+class Percepton:
+    def __init__(self):
+        lista_wynikow = []
+
+    def print(self):
+        pass
+
+    wszystkie = []
+    pass
+
+
+class Percepton2:
+    def __init__(self):
+        pass
+    def print(self):
+        pass
+
+#mozna iterowac po liscie klas, i dec .print
+n2 = 2
+
+
+Percepton.print(n2)
+
+
+#mozna wykonac funkcje klasy dla elementu
+#rozpisac percepton na klase ktora pobiera informacje o liczbie wejsc, ile wejsc na start
+#ma utworzycz podstawowe bwagi
+#teach i run
+#modul random w pythonie, funkcje losowych liczb
+# na zwyklych floatach
+
+
+def statyczna():
+    pass
+
+
+
 def pobierz_kurs():
     while True:
         try:
@@ -40,6 +77,9 @@ def licz_wage(waga, blad, predkosc=predkosc_liczenia):
     return waga
     pass
 
+
+klasa = Percepton()
+del Percepton
 
 for i in range(100):
     poprzedni_kurs = nowy_kurs
