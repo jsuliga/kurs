@@ -1,36 +1,65 @@
-import requests
-import json
-import datetime
-import time
+eur = 100
+usd = 100
+lista_kursow = []
+waga_a = 1.5
+waga_b = 3
+predkosc_liczenia = 0.001
+nowy_kurs = 1
 
-def pobierz_kurs(waluta="usd", termin="today"):
-    try:
-        wynik = requests.get('http://api.nbp.pl/api/exchangerates/rates/a/' + waluta + '/' + termin + '/')
-        wynik = json.loads(wynik.content)
-        wynik = wynik['rates'][0]['mid']
-        return wynik
-    except:
-        return 0
 
-def roznica_binarna(x, y=0):
+def pobierz_kurs():
+    while True:
+        try:
+            x = float(input("Podaj kurs: "))
+            return float(x)
+        except:
+            print("Nieprawidlowy kurs")
+
+
+def roznica_binarna(x=[], y=0):
     if x - y <= 0:
         return 0
     return 1
+
 
 def srednia_xdni(x, y=5):
     suma = 0
     if len(x) == 0:
         return 0
     if len(x) < y:
-        for x in x:
-            suma += x
+        for z in x:
+            suma += z
+        return suma / len(x)
     else:
-        for x in x[-y:]:
-            suma += x
-    return suma / len(x)
+        for z in x[-y:]:
+            suma += z
+    return suma / y
 
-wynik = {}
-# start = input("Podaj poczatkowa date")
-start = "2023-01-01"
-# koniec = input("Podaj koncowa date")
-koniec = "2023-01-30"
+
+def licz_wage(waga, blad, predkosc=predkosc_liczenia):
+    waga = waga + ostatnia_srednia * blad * predkosc
+    return waga
+    pass
+
+
+class Percepton:
+    lista = []
+
+    def __init__(self):
+        pass
+
+    def __str__(self, x=lista):
+        print("Wartosc obiektu" + str(x))
+
+    def dodaj(self, x, y=lista):
+        y = y.append(x)
+
+
+for i in range(100):
+    poprzedni_kurs = nowy_kurs
+    nowy_kurs = pobierz_kurs()
+    lista_kursow.append(nowy_kurs)
+    print(type(lista_kursow))
+    print(lista_kursow)
+    print("Różnica binarna: ", str(roznica_binarna(nowy_kurs, poprzedni_kurs)))
+    print("Średnia 5 dni  : ", str(srednia_xdni(lista_kursow)))

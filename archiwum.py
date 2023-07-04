@@ -108,6 +108,6 @@ class Percepton:
     def __str__(self, lista):
         return ("Wartosc obiektu" + str(lista))
 
-    def last_100_days(self):
-        print("Pobieram")
+    def dodaj(self, x, y=lista):
+        y = y.append(x)
 

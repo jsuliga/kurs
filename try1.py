@@ -61,10 +61,11 @@ for data in xxx:
     try:
         c = b / a
     except:
-        c = 0
+        pass
     wynik[data] = {'usd': a, 'eur': b, 'kurs': c}
     time.sleep(0.1)
-print(wynik)
-print(json.dumps(wynik, indent=4))
+for aaaa in wynik:
+    print(aaaa.__str__())
+#print(json.dumps(wynik, indent=4))
 # print(pobierz_kurs('eur', str(poczatek)))
 # print(pobierz_kurs('usd', str(poczatek)))
