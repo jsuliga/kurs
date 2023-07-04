@@ -36,24 +36,22 @@ def srednia_xdni(x, y=5):
 
 
 class Percepton:
-    def __init__(self, x, y=0.001):
+    def __init__(self, x, y=0.01):
         self.lista_wag = []
         self.predkosc_uczenia = y
         self.ilos_wag = x
         self.blad = 0
         for i in range(0, x):
             self.lista_wag.append(random.random())
-        print(self.lista_wag)
 
     def teach(self, *argv):
-        # return 0
         lista = list(argv)
         rezultat = lista.pop()
-        print(lista)
-        if len(argv) == len(self.lista_wag):
-            self.blad = rezultat - self.run(*lista)
+        self.blad = rezultat - self.run(*lista)
         for i in range(0, len(self.lista_wag)):
             self.lista_wag[i] = self.lista_wag[i] + argv[i] * self.predkosc_uczenia * self.blad
+        print("blad" + str(self.blad))
+        print("lista" + str(self.lista_wag))
 
     def run(self, *argv):
         suma = 0
@@ -62,19 +60,21 @@ class Percepton:
         return suma
 
 
-cholera = Percepton(2)
-cholera.teach(1, 2)
+cholera = Percepton(2, 0.1)
+cholera.lista_wag = [0.9907506605180431, 0.9989830121037068]
 for i in range(100):
     poprzedni_kurs = nowy_kurs
     nowy_kurs = pobierz_kurs()
     lista_kursow.append(nowy_kurs)
-    ostatnia_roznica = roznica_binarna(nowy_kurs, poprzedni_kurs)
+    #ostatnia_roznica = roznica_binarna(nowy_kurs, poprzedni_kurs)
+    ostatnia_roznica = nowy_kurs - poprzedni_kurs
     ostatnia_srednia = srednia_xdni(lista_kursow)
-    print("Różnica binarna: ", str(ostatnia_roznica))
+    print("Różnica        : ", str(ostatnia_roznica))
     print("Średnia 5 dni  : ", str(ostatnia_srednia))
     if i == 0:
-        cholera.teach(nowy_kurs, ostatnia_roznica, ostatnia_srednia)
-    else:
-        aaaa = cholera.run(ostatnia_roznica, ostatnia_srednia)
-        print(aaaa)
         cholera.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
+    else:
+        przewidziany = cholera.run(ostatnia_roznica, ostatnia_srednia)
+        cholera.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
+print(cholera.blad)
+print(cholera.lista_wag)

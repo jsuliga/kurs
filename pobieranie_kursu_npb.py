@@ -14,7 +14,7 @@ def pobierz_kurs(waluta="usd", termin="today"):
         return 0
 
 
-def lista_dat(x="2023-01-01", y="2023-06-06", z='%Y-%m-%d'):
+def lista_dat(x="2022-01-01", y="2022-06-06", z='%Y-%m-%d'):
     a = datetime.datetime.strptime(x, z)
     b = datetime.datetime.strptime(y, z)
     if (b - a).days > 0:
