@@ -98,3 +98,16 @@ for i in range(100):
         print(rezultat)
     blad = rezultat - nowy_kurs
     print(blad)
+
+class Percepton:
+    lista = []
+
+    def __init__(self):
+        pass
+
+    def __str__(self, lista):
+        return ("Wartosc obiektu" + str(lista))
+
+    def last_100_days(self):
+        print("Pobieram")
+

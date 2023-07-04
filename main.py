@@ -1,6 +1,7 @@
 import requests
 import json
 import datetime
+import time
 
 
 def pobierz_kurs(waluta="usd", termin="today"):
@@ -13,21 +14,35 @@ def pobierz_kurs(waluta="usd", termin="today"):
         return 0
 
 
-class Percepton:
-    lista = []
-    def __init__(self):
-        pass
+def lista_dat(poczatek="2023-01-01", koniec="2023-06-06", format='%Y-%m-%d'):
+    a = datetime.datetime.strptime(poczatek, format)
+    b = datetime.datetime.strptime(koniec, format)
+    if (b - a).days > 0:
+        lista = []
+        while a.date() != b.date():
+            if a.weekday() > 4:
+                a += datetime.timedelta(1)
+            else:
+                lista.append(a.date().__str__())
+                a += datetime.timedelta(1)
+        return lista
+    else:
+        return []
 
-    def __str__(self,lista):
-        return ("Wartosc obiektu"+str(lista))
-
-    def last_100_days(self):
-        print("Pobieram")
+def lista_kursow(lista = lista_dat()):
 
 
-#poczatek = datetime.date(2022, 5, 5)
-zwariowane_kursy = Percepton
-zwariowane_kursy.last_100_days(zwariowane_kursy)
-
-#print(pobierz_kurs('eur', str(poczatek)))
-#print(pobierz_kurs('usd', str(poczatek)))
+wynik = {}
+start = input("Podaj poczatkowa date")
+koniec = input("Podaj koncowa date")
+x = lista_dat(start, koniec)
+for data in x:
+    a = pobierz_kurs('usd', data)
+    b = pobierz_kurs('eur', data)
+    c = a / b
+    wynik[data] = {'usd': a, 'eur': b, 'pln': c}
+    print(str(wynik))
+    print(pobierz_kurs('usd', data))
+    time.sleep(0.1)
+# print(pobierz_kurs('eur', str(poczatek)))
+# print(pobierz_kurs('usd', str(poczatek)))
