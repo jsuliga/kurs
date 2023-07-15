@@ -4,6 +4,8 @@ eur = 100
 usd = 100
 lista_kursow = []
 nowy_kurs = 1
+how_many_runs = 5
+learning_test_file = "kursy"
 
 
 def pobierz_kurs():
@@ -60,28 +62,50 @@ class Percepton:
         return suma
 
 
-class Teacher:
-    def __init__(self, percepton):
-        self.percepton = percepton
-
-
 class Inputs:
     def __init__(self):
         self.input_list = []
+        self.input_list_working = []
+
+    def __str__(self):
+        print(str(self.input_list))
+        print(str(self.input_list_working))
+        return "ok"
 
     def load_file(self, file_name):
         file = open(file_name, "r")
+        self.input_list = []
         for line in file:
-            self.input_list.append("a")
+            self.input_list.append(line.strip())
+        self.input_list_working = self.input_list
+
+    def next_element(self):
+        try:
+            next_element_temp = self.input_list_working.pop(0)
+        except:
+            while True:
+                try:
+                    next_element_temp = float(input("Lista pusta, podaj kurs: "))
+                    return next_element_temp
+                except:
+                    print("Nieprawidlowy kurs")
+        return next_element_temp
+
+    def all_elements(self):
+        return self.input_list
+
+class Teacher:
+    def __str__(self):
+        self.percepton_temp = Percepton
 
 
-test = Inputs
-
-test.load_file(test, "kursy")
-
-cholera = Percepton(2, 0.1)
-cholera.lista_wag = [0.9907506605180431, 0.9989830121037068]
-for i in range(5):
+take_inputs = Inputs()
+take_inputs.load_file(learning_test_file)
+print(take_inputs.all_elements())
+teaching = Teacher
+first_percepton = Percepton(2, 0.1)
+first_percepton.lista_wag = [0.9907506605180431, 0.9989830121037068]
+for i in range(how_many_runs):
     poprzedni_kurs = nowy_kurs
     nowy_kurs = pobierz_kurs()
     lista_kursow.append(nowy_kurs)
@@ -91,9 +115,9 @@ for i in range(5):
     print("Różnica        : ", str(ostatnia_roznica))
     print("Średnia 5 dni  : ", str(ostatnia_srednia))
     if i == 0:
-        cholera.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
+        first_percepton.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
     else:
-        przewidziany = cholera.run(ostatnia_roznica, ostatnia_srednia)
-        cholera.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
-print(cholera.blad)
-print(cholera.lista_wag)
+        przewidziany = first_percepton.run(ostatnia_roznica, ostatnia_srednia)
+        first_percepton.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
+print(first_percepton.blad)
+print(first_percepton.lista_wag)
