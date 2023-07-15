@@ -59,17 +59,33 @@ class Percepton:
             suma += self.lista_wag[i] * argv[i]
         return suma
 
-class PodajKurs:
-    def __init__(self, nazwa_pliku):
-        self.lista_kursow = []
-        
+
+class Teacher:
+    def __init__(self, percepton):
+        self.percepton = percepton
+
+
+class Inputs:
+    def __init__(self):
+        self.input_list = []
+
+    def load_file(self, file_name):
+        file = open(file_name, "r")
+        for line in file:
+            self.input_list.append("a")
+
+
+test = Inputs
+
+test.load_file(test, "kursy")
+
 cholera = Percepton(2, 0.1)
 cholera.lista_wag = [0.9907506605180431, 0.9989830121037068]
-for i in range(100):
+for i in range(5):
     poprzedni_kurs = nowy_kurs
     nowy_kurs = pobierz_kurs()
     lista_kursow.append(nowy_kurs)
-    #ostatnia_roznica = roznica_binarna(nowy_kurs, poprzedni_kurs)
+    # ostatnia_roznica = roznica_binarna(nowy_kurs, poprzedni_kurs)
     ostatnia_roznica = nowy_kurs - poprzedni_kurs
     ostatnia_srednia = srednia_xdni(lista_kursow)
     print("Różnica        : ", str(ostatnia_roznica))

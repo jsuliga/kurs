@@ -10,7 +10,7 @@ class ExchangeRateNpb:
         self.current_rate = float
         pass
 
-    def get_date(self, waluta="usd", termin="today"):
+    def get_by_date(self, waluta="usd", termin="today"):
         try:
             wynik = requests.get('http://api.nbp.pl/api/exchangerates/rates/a/' + waluta + '/' + termin + '/')
             wynik = json.loads(wynik.content)
