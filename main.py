@@ -59,7 +59,10 @@ class Percepton:
             suma += self.lista_wag[i] * argv[i]
         return suma
 
-
+class PodajKurs:
+    def __init__(self, nazwa_pliku):
+        self.lista_kursow = []
+        
 cholera = Percepton(2, 0.1)
 cholera.lista_wag = [0.9907506605180431, 0.9989830121037068]
 for i in range(100):
