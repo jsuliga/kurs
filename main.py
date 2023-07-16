@@ -38,13 +38,16 @@ def srednia_xdni(x, y=5):
 
 
 class Percepton:
-    def __init__(self, x, y=0.01):
+    def __init__(self, ilosc_wag=2, y=0.01):
         self.lista_wag = []
         self.predkosc_uczenia = y
-        self.ilos_wag = x
+        self.ilos_wag = ilosc_wag
         self.blad = 0
-        for i in range(0, x):
+        for i in range(0, ilosc_wag):
             self.lista_wag.append(random.random())
+
+    def __str__(self):
+        return str(self.lista_wag)
 
     def teach(self, *argv):
         lista = list(argv)
@@ -52,8 +55,8 @@ class Percepton:
         self.blad = rezultat - self.run(*lista)
         for i in range(0, len(self.lista_wag)):
             self.lista_wag[i] = self.lista_wag[i] + argv[i] * self.predkosc_uczenia * self.blad
-        print("blad" + str(self.blad))
-        print("lista" + str(self.lista_wag))
+        print("Blad: " + str(self.blad))
+        print("Lista: " + str(self.lista_wag))
 
     def run(self, *argv):
         suma = 0
@@ -94,20 +97,27 @@ class Inputs:
     def all_elements(self):
         return self.input_list
 
+
 class Teacher:
+    def __init__(self):
+        self.percepton_temp = Percepton()
+
     def __str__(self):
-        self.percepton_temp = Percepton
+        return str(self.percepton_temp)
 
 
 take_inputs = Inputs()
 take_inputs.load_file(learning_test_file)
-print(take_inputs.all_elements())
-teaching = Teacher
+teaching = Teacher()
+print(str(teaching))
+print(teaching)
 first_percepton = Percepton(2, 0.1)
 first_percepton.lista_wag = [0.9907506605180431, 0.9989830121037068]
 for i in range(how_many_runs):
     poprzedni_kurs = nowy_kurs
     nowy_kurs = pobierz_kurs()
+    if nowy_kurs == 0:
+        break
     lista_kursow.append(nowy_kurs)
     # ostatnia_roznica = roznica_binarna(nowy_kurs, poprzedni_kurs)
     ostatnia_roznica = nowy_kurs - poprzedni_kurs
