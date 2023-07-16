@@ -101,15 +101,38 @@ class Inputs:
 class Teacher:
     def __init__(self):
         self.percepton_temp = Percepton()
+        self.percepton_list = []
 
     def __str__(self):
         return str(self.percepton_temp)
+
+    def __percepton_iteration(self):
+        pass
+
+
+    def add_percepton(self, perc):
+        self.percepton_temp = perc
+
+    def reset_percepton(self):
+        self.percepton_temp = Percepton()
+
+    def teach_one(self, input_one):
+        pass
+
+    def find_best(self, *args):
+        for learning_speed_iteration in range(-10, 10):
+            temp_learning_speed=10**learning_speed_iteration
+            self.percepton_list.append(Percepton(y=temp_learning_speed))
+
+
+
+
 
 
 take_inputs = Inputs()
 take_inputs.load_file(learning_test_file)
 teaching = Teacher()
-print(str(teaching))
+teaching.find_best(1)
 print(teaching)
 first_percepton = Percepton(2, 0.1)
 first_percepton.lista_wag = [0.9907506605180431, 0.9989830121037068]
