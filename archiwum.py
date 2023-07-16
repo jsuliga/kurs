@@ -124,3 +124,28 @@ class Percepton:
 
     def dodaj(self, x, y=lista):
         y = y.append(x)
+
+
+
+
+
+first_percepton = Percepton(2, 0.1)
+first_percepton.lista_wag = [0.9907506605180431, 0.9989830121037068]
+for i in range(how_many_runs):
+    poprzedni_kurs = nowy_kurs
+    nowy_kurs = pobierz_kurs()
+    if nowy_kurs == 0:
+        break
+    #lista_kursow.append(nowy_kurs)
+    # ostatnia_roznica = roznica_binarna(nowy_kurs, poprzedni_kurs)
+    ostatnia_roznica = nowy_kurs - poprzedni_kurs
+    ostatnia_srednia = srednia_xdni(lista_kursow)
+    print("Różnica        : ", str(ostatnia_roznica))
+    print("Średnia 5 dni  : ", str(ostatnia_srednia))
+    if i == 0:
+        first_percepton.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
+    else:
+        przewidziany = first_percepton.run(ostatnia_roznica, ostatnia_srednia)
+        first_percepton.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
+print(first_percepton.blad)
+print(first_percepton.lista_wag)

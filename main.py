@@ -75,7 +75,7 @@ class Inputs:
         print(str(self.input_list_working))
         return "ok"
 
-    def load_file(self, file_name):
+    def load_file(self, file_name="kursy"):
         file = open(file_name, "r")
         self.input_list = []
         for line in file:
@@ -102,12 +102,21 @@ class Teacher:
     def __init__(self):
         self.percepton_temp = Percepton()
         self.percepton_list = []
+        self.wyniki_lista = []
+        for learning_speed_iteration in range(-10, 10):
+            temp_learning_speed=10**learning_speed_iteration
+            self.percepton_list.append(Percepton(y=temp_learning_speed))
+
 
     def __str__(self):
-        return str(self.percepton_temp)
+        str_temp = "One percepton: " + str(self.percepton_temp) +"\n"
+        for element in self.percepton_list:
+            str_temp +="Array of percepton: " + str(element) +"\n"
+        return str(str_temp)
 
-    def __percepton_iteration(self):
-        pass
+    def __print_list(self, print_list):
+        for element in print_list:
+            print(element)
 
 
     def add_percepton(self, perc):
@@ -120,9 +129,13 @@ class Teacher:
         pass
 
     def find_best(self, *args):
-        for learning_speed_iteration in range(-10, 10):
-            temp_learning_speed=10**learning_speed_iteration
-            self.percepton_list.append(Percepton(y=temp_learning_speed))
+        tem_array = Inputs()
+        tem_array.load_file()
+        aaaaaaaa = tem_array.all_elements()
+        for element in self.percepton_list:
+            for asd in aaaaaaaa:
+                element.teach(asd)
+
 
 
 
@@ -133,24 +146,5 @@ take_inputs = Inputs()
 take_inputs.load_file(learning_test_file)
 teaching = Teacher()
 teaching.find_best(1)
-print(teaching)
-first_percepton = Percepton(2, 0.1)
-first_percepton.lista_wag = [0.9907506605180431, 0.9989830121037068]
-for i in range(how_many_runs):
-    poprzedni_kurs = nowy_kurs
-    nowy_kurs = pobierz_kurs()
-    if nowy_kurs == 0:
-        break
-    lista_kursow.append(nowy_kurs)
-    # ostatnia_roznica = roznica_binarna(nowy_kurs, poprzedni_kurs)
-    ostatnia_roznica = nowy_kurs - poprzedni_kurs
-    ostatnia_srednia = srednia_xdni(lista_kursow)
-    print("Różnica        : ", str(ostatnia_roznica))
-    print("Średnia 5 dni  : ", str(ostatnia_srednia))
-    if i == 0:
-        first_percepton.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
-    else:
-        przewidziany = first_percepton.run(ostatnia_roznica, ostatnia_srednia)
-        first_percepton.teach(ostatnia_roznica, ostatnia_srednia, nowy_kurs)
-print(first_percepton.blad)
-print(first_percepton.lista_wag)
+
+
